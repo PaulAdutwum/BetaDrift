@@ -10,8 +10,7 @@ a few papers on covariance estimation, trying to work through what
 "risk" actually means in a portfolio context beyond the textbook
 definition.
 
-The question that actually got me building something, instead of just
-reading about it, came out of a conversation with a quant working in
+The question that actually got me building BetaDrift, came out of a conversation with a quant working in
 portfolio management during my interview process. We got to talking
 about rebalancing, and it left me stuck on a question I couldn't shake:
 how do quants actually evaluate which factors are shifting day to day —
