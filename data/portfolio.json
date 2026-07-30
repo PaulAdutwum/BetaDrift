@@ -1,0 +1,30 @@
+{
+  "name": "Balanced Growth Portfolio",
+  "rebalance_date": "2024-01-15",
+  "weights": {
+    "SPY":  0.30,
+    "QQQ":  0.15,
+    "EFA":  0.10,
+    "EEM":  0.05,
+    "TLT":  0.15,
+    "IEF":  0.05,
+    "HYG":  0.08,
+    "GLD":  0.07,
+    "VNQ":  0.05
+  },
+  "factor_targets": {
+    "MKT":   0.70,
+    "DUR":   4.0,
+    "CRED":  0.28,
+    "MOM":   0.10,
+    "VOL":  -0.15,
+    "SMB":   0.05,
+    "INTL":  0.20,
+    "CMDTY": 0.08
+  },
+  "drift_thresholds": {
+    "calm":       2.0,
+    "transition": 1.5,
+    "stress":     1.0
+  }
+}

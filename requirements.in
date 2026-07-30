@@ -1,0 +1,15 @@
+yfinance
+pandas>=2.2,<2.3
+numpy>=1.26,<2.1
+scipy
+scikit-learn
+cvxpy
+statsmodels
+hmmlearn
+plotly
+dash
+dash-bootstrap-components
+joblib
+matplotlib
+seaborn
+requests
