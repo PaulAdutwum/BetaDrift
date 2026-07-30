@@ -13,13 +13,13 @@ definition.
 The question that actually got me building BetaDrift, came out of a conversation with a quant working in
 portfolio management during my interview process. We got to talking
 about rebalancing, and it left me stuck on a question I couldn't shake:
-how do quants actually evaluate which factors are shifting day to day —
+how do quants actually evaluate which factors are shifting day to day -
 what tells them something in the portfolio has changed enough to act
-on — and does that visibility actually shape how they adjust, or is a
+on - and does that visibility actually shape how they adjust, or is a
 lot of it judgment calls made without a continuous read on the
 underlying exposures? I kept wondering whether a tool that studied that
 continuously — watching factor exposures, catching what's drifting,
-flagging it automatically — could actually be useful, or whether the
+flagging it automatically,  could actually be useful, or whether the
 sophisticated math I'd been reading about was harder to wire into a
 real decision than the theory made it look.
 
@@ -71,24 +71,24 @@ together in ways that a static covariance matrix had no way of capturing.
 CorrelBreak watches for this. It computes five signals from a rolling
 63-day covariance matrix across 12 assets:
 
-- **Average pairwise correlation** — the primary stress signal. When
+- **Average pairwise correlation** : the primary stress signal. When
   assets that normally move independently begin moving together, this
   number rises. In calm markets it sits around 0.35–0.50. In stress it
   can reach 0.80–0.90.
 
-- **Correlation dispersion** — whether correlations are heterogeneous
+- **Correlation dispersion** : whether correlations are heterogeneous
   (calm: some high, some low, some negative) or compressed (stress:
   everything converging toward the same positive number).
 
-- **Average realized volatility** — annualized, across all 12 assets.
+- **Average realized volatility** :  annualized, across all 12 assets.
   High volatility is both a stress signal and a factor that changes the
   cost-benefit of rebalancing.
 
-- **Cross-sectional return dispersion** — how differently the 12 assets
+- **Cross-sectional return dispersion** : how differently the 12 assets
   are moving on a given day. Low dispersion means everything is moving
   in lockstep. That convergence is a warning sign.
 
-- **SPY–TLT rolling correlation** — the flight-to-quality signal. In
+- **SPY–TLT rolling correlation** : the flight-to-quality signal. In
   normal conditions, when equities fall, investors buy Treasuries and
   this correlation is negative. When it turns positive — as it did to
   +0.66 in 2022 — bonds and stocks are falling together and the
@@ -367,7 +367,7 @@ python dashboard.py
 
 **Status bar:** Current regime (green / amber / red badge), portfolio annualized volatility vs. target, active alert count, last updated timestamp.
 
-**Panel A — Risk Attribution:** Waterfall chart of factor contributions to total portfolio variance, updated on each refresh.
+**Panel A - Risk Attribution:** Waterfall chart of factor contributions to total portfolio variance, updated on each refresh.
 
 **Panel B — Factor Drift:** Traffic-light bar chart of current z-scores for all 8 factors. Green within threshold, amber approaching, red breached.
 
