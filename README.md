@@ -218,7 +218,7 @@ the "everything moves together" component that PC1 captures.
 **Does regime awareness translate into better performance?** A
 walk-forward comparison of equal-weight, a static global-minimum-variance
 portfolio (classical Markowitz, fit once on the first year and never
-updated), and a toy regime-switching strategy that shifts toward
+updated), and a simplified regime-switching strategy that shifts toward
 TLT/GLD whenever CorrelBreak detects Transition or Stress. The honest
 result, computed in the notebook rather than assumed going in:
 
@@ -440,9 +440,9 @@ Two things surfaced only by running this against real market data, not from read
 
 ## Known Limitations
 
-**Look-ahead bias.** `fig_cb3`'s toy regime-switching comparison uses in-sample HMM labels (the model was trained on the full history, including the period being backtested). A production system would re-fit the HMM at each date using only past data.
+**Look-ahead bias.** `fig_cb3`'s simplified regime-switching comparison uses in-sample HMM labels (the model was trained on the full history, including the period being backtested). A production system would re-fit the HMM at each date using only past data.
 
-**Fixed defensive allocation is not regime-robust.** `fig_cb3`'s walk-forward shows the toy regime-switching strategy helped in 2020 but *hurt* in 2022, because its static defensive tilt (heavy TLT/GLD) assumes a flight-to-quality crisis and 2022 was a rate shock instead. A single fixed "risk-off" allocation is not a substitute for BetaDrift's actual approach — conditioning the rebalance target on the current factor structure rather than a static defensive basket.
+**Fixed defensive allocation is not regime-robust.** `fig_cb3`'s walk-forward shows the simplified regime-switching strategy helped in 2020 but *hurt* in 2022, because its static defensive tilt (heavy TLT/GLD) assumes a flight-to-quality crisis and 2022 was a rate shock instead. A single fixed "risk-off" allocation is not a substitute for BetaDrift's actual approach — conditioning the rebalance target on the current factor structure rather than a static defensive basket.
 
 **Statistical factor model.** Factor loadings are derived from return regressions, not company fundamentals. MSCI Barra fundamental factors would be more stable and more interpretable in a production context.
 
