@@ -1,9 +1,5 @@
 # BetaDrift
 
-Most of what I know about this space comes from a growing interest in
-financial markets, risk management, and portfolio optimization — not
-from a finance background.
-
 ---
 
 ## Background
