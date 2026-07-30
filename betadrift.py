@@ -939,6 +939,7 @@ def optimize_rebalance(w_current, target_exposures, B_matrix, tc_vector,
     }
 
 
+
 if __name__ == '__main__':
     # Module 1 smoke test: fetch real data, print QA report and summary
     # stats, so this can be run standalone before building CorrelBreak.
