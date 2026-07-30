@@ -1,30 +1,34 @@
 # BetaDrift
 
-Most portfolio risk systems tell you what happened overnight. BetaDrift tells you what is happening right now — and what to do about it.
+Most of what I know about this space comes from a growing interest in
+financial markets, risk management, and portfolio optimization — not
+from a finance background.
 
 ---
 
 ## Background
 
- Most of what I know about portfolio management came
-from reading: Markowitz's original mean-variance framework, some of the
-Fama-French factor literature, and a few papers on covariance estimation
-that I found while working through the math of what "risk" actually means
-in a portfolio context.
+I got into the reading side of this first: Markowitz's original
+mean-variance framework, some of the Fama-French factor literature, and
+a few papers on covariance estimation, trying to work through what
+"risk" actually means in a portfolio context beyond the textbook
+definition.
 
-What shifted my thinking was a conversation I had with a quant working in
-portfolio management during my interview process. We talked about how
-rebalancing decisions get made in practice — and the honest answer was
-that most of it relies on simple weight-based rules and a lot of
-professional judgment. The sophisticated math exists, but wiring it into
-something that actually helps make the decision in real time is a harder
-problem than the theory suggests.
+The question that actually got me building something, instead of just
+reading about it, came out of a conversation with a quant working in
+portfolio management during my interview process. We got to talking
+about rebalancing, and it left me stuck on a question I couldn't shake:
+how do quants actually evaluate which factors are shifting day to day —
+what tells them something in the portfolio has changed enough to act
+on — and does that visibility actually shape how they adjust, or is a
+lot of it judgment calls made without a continuous read on the
+underlying exposures? I kept wondering whether a tool that studied that
+continuously — watching factor exposures, catching what's drifting,
+flagging it automatically — could actually be useful, or whether the
+sophisticated math I'd been reading about was harder to wire into a
+real decision than the theory made it look.
 
-That conversation stuck with me. I wanted to understand whether the
-quantitative tools I had been reading about — factor models, covariance
-estimation, convex optimization — could be assembled into something that
-actually automates that decision in a principled way. BetaDrift is my
-attempt to find out.
+BetaDrift is my attempt to find out.
 
 ---
 
