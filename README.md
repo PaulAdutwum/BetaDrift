@@ -102,20 +102,20 @@ it is.
 
 **Why these 12 assets specifically:**
 
-| Ticker | Asset | Why it's in the universe |
-|--------|-------|--------------------------|
-| SPY | US Large Cap | Broad market factor proxy — the baseline everything is measured against |
-| QQQ | US Tech | Captures AI and mega-cap concentration risk — increasingly correlated with SPY but with amplified factor loadings |
-| IWM | US Small Cap | Size factor proxy — behaves differently from large cap in stress and recovery |
-| EFA | Developed Intl | Geographic diversification — tests whether international equity truly decorrelates from US |
-| EEM | Emerging Mkts | EM risk — high beta, sensitive to dollar strength and global risk appetite |
-| TLT | Long Treasury | Primary safe-haven asset and the key leg of the SPY-TLT correlation signal |
-| IEF | Med Treasury | Duration reference — DUR factor is computed as TLT minus IEF to isolate long-duration sensitivity |
-| HYG | High Yield Credit | Bridges equity and fixed income risk — falls with equities in stress despite being technically a bond |
-| GLD | Gold | Inflation hedge and tail-risk asset — behaved differently in 2020 (up) vs 2022 (volatile) giving the HMM discriminating power |
-| USO | Oil | Energy and geopolitical risk proxy — the ongoing Middle East conflict driving oil above $85 in early 2026 is exactly the kind of shock this asset is meant to capture |
-| VNQ | Real Estate | Rate-sensitive equity — useful for separating duration risk from pure equity risk |
-| VIXY | VIX Short-Term | Explicit volatility hedge — has strongly negative equity beta and spikes in crises, making it a direct stress signal |
+| Ticker | Asset             | Why it's in the universe                                                                                                                                              |
+| ------ | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SPY    | US Large Cap      | Broad market factor proxy — the baseline everything is measured against                                                                                               |
+| QQQ    | US Tech           | Captures AI and mega-cap concentration risk — increasingly correlated with SPY but with amplified factor loadings                                                     |
+| IWM    | US Small Cap      | Size factor proxy — behaves differently from large cap in stress and recovery                                                                                         |
+| EFA    | Developed Intl    | Geographic diversification — tests whether international equity truly decorrelates from US                                                                            |
+| EEM    | Emerging Mkts     | EM risk — high beta, sensitive to dollar strength and global risk appetite                                                                                            |
+| TLT    | Long Treasury     | Primary safe-haven asset and the key leg of the SPY-TLT correlation signal                                                                                            |
+| IEF    | Med Treasury      | Duration reference — DUR factor is computed as TLT minus IEF to isolate long-duration sensitivity                                                                     |
+| HYG    | High Yield Credit | Bridges equity and fixed income risk — falls with equities in stress despite being technically a bond                                                                 |
+| GLD    | Gold              | Inflation hedge and tail-risk asset — behaved differently in 2020 (up) vs 2022 (volatile) giving the HMM discriminating power                                         |
+| USO    | Oil               | Energy and geopolitical risk proxy — the ongoing Middle East conflict driving oil above $85 in early 2026 is exactly the kind of shock this asset is meant to capture |
+| VNQ    | Real Estate       | Rate-sensitive equity — useful for separating duration risk from pure equity risk                                                                                     |
+| VIXY   | VIX Short-Term    | Explicit volatility hedge — has strongly negative equity beta and spikes in crises, making it a direct stress signal                                                  |
 
 ### BetaDrift — factor risk and rebalancing
 
@@ -133,13 +133,13 @@ practitioners actually talk about — not black-box outputs.
 
 ![Factor Loadings](outputs/fig2_factor_loadings.png)
 
-*Current factor loading heatmap across all 12 assets, rolling market beta
+_Current factor loading heatmap across all 12 assets, rolling market beta
 for SPY/QQQ/TLT, R² over time, and rolling idiosyncratic volatility. QQQ's
 rising market beta into 2023–2024 (AI concentration) is visible directly
 in the beta panel. TLT's beta comes out positive rather than the
 textbook-negative "flight to quality" beta — a real property of how DUR
 is constructed (TLT = IEF + DUR by definition), not a modeling error; see
-"A Data Quirk I Found," below.*
+"A Data Quirk I Found," below._
 
 The portfolio's total factor exposure to each factor is the weighted
 average of its assets' loadings. Total portfolio variance is then
@@ -159,11 +159,11 @@ the portfolio.
 
 The two components are connected through the drift thresholds:
 
-| Regime | Drift Threshold | Reasoning |
-|--------|----------------|-----------|
-| Calm | 2.0σ | Transaction costs don't justify frequent rebalancing when structure is stable |
-| Transition | 1.5σ | Correlation structure is shifting — start watching more closely |
-| Stress | 1.0σ | Factor exposures amplify losses faster; the cost of inaction rises |
+| Regime     | Drift Threshold | Reasoning                                                                     |
+| ---------- | --------------- | ----------------------------------------------------------------------------- |
+| Calm       | 2.0σ            | Transaction costs don't justify frequent rebalancing when structure is stable |
+| Transition | 1.5σ            | Correlation structure is shifting — start watching more closely               |
+| Stress     | 1.0σ            | Factor exposures amplify losses faster; the cost of inaction rises            |
 
 ---
 
@@ -217,20 +217,20 @@ updated), and a simplified regime-switching strategy that shifts toward
 TLT/GLD whenever CorrelBreak detects Transition or Stress. The honest
 result, computed in the notebook rather than assumed going in:
 
-| Episode | Equal-weight | Static MVO | Regime-switching |
-|---|---|---|---|
-| 2020 COVID max drawdown | −14.9% | −14.5% | **−13.2%** |
-| 2022 rate shock max drawdown | −20.6% | −22.8% | **−24.5%** |
+| Episode                      | Equal-weight | Static MVO | Regime-switching |
+| ---------------------------- | ------------ | ---------- | ---------------- |
+| 2020 COVID max drawdown      | −14.9%       | −14.5%     | **−13.2%**       |
+| 2022 rate shock max drawdown | −20.6%       | −22.8%     | **−24.5%**       |
 
 Regime-switching **helped in 2020 and hurt in 2022.** The fixed defensive
-allocation (heavy TLT/GLD) is itself an implicit bet on what *kind* of
+allocation (heavy TLT/GLD) is itself an implicit bet on what _kind_ of
 stress is coming. 2020 was a flight-to-quality panic — TLT rallied,
 cushioning the fall. 2022 was a rate shock — TLT was a primary source of
 the selloff (consistent with TLT's positive, not negative, market beta
 found in Figure 2), so overweighting it made the drawdown worse. This is
 not a bug; it's the actual output of a fixed playbook meeting the wrong
 kind of crisis, and it's the reason BetaDrift's drift-tracking and
-rebalance-optimizer machinery conditions on the *current* factor
+rebalance-optimizer machinery conditions on the _current_ factor
 structure (DUR, CRED) rather than a single static defensive target.
 Also present: look-ahead bias — the regime-switching backtest uses HMM
 labels fit on the full history, including the period being tested. A
@@ -275,40 +275,45 @@ Regime label + confidence probs         Factor loadings per asset
 
 **The 8 factors:**
 
-| Factor | Construction | What it captures |
-|--------|-------------|-----------------|
-| MKT | SPY returns | Broad market beta |
-| DUR | TLT − IEF | Pure interest rate sensitivity |
-| CRED | HYG − IEF | Credit spread / default risk |
-| MOM | Long-short cross-sectional 12-1mo return rank | Momentum premium |
-| VOL | VIXY returns | Explicit volatility exposure |
-| SMB | IWM − SPY | Small-cap size premium |
-| INTL | EFA − SPY | International vs. US equity |
-| CMDTY | 0.5×GLD + 0.5×USO | Commodity / inflation |
+| Factor | Construction                                  | What it captures               |
+| ------ | --------------------------------------------- | ------------------------------ |
+| MKT    | SPY returns                                   | Broad market beta              |
+| DUR    | TLT − IEF                                     | Pure interest rate sensitivity |
+| CRED   | HYG − IEF                                     | Credit spread / default risk   |
+| MOM    | Long-short cross-sectional 12-1mo return rank | Momentum premium               |
+| VOL    | VIXY returns                                  | Explicit volatility exposure   |
+| SMB    | IWM − SPY                                     | Small-cap size premium         |
+| INTL   | EFA − SPY                                     | International vs. US equity    |
+| CMDTY  | 0.5×GLD + 0.5×USO                             | Commodity / inflation          |
 
 ![Factor Returns](outputs/fig1_factor_returns.png)
 
-*Rolling 63-day cumulative return per factor. DUR trends positive until
+_Rolling 63-day cumulative return per factor. DUR trends positive until
 the 2022 rate shock, then falls sharply. VOL trends down overall (VIX
-mean-reversion) with a sharp spike in March 2020.*
+mean-reversion) with a sharp spike in March 2020._
 
 ---
 
 ## The Math
 
 **Factor decomposition:**
+
 ```
 r_i(t) = αᵢ + β_MKT·f_MKT(t) + β_DUR·f_DUR(t) + ... + εᵢ(t)
 ```
+
 Estimated via rolling 126-day OLS (`statsmodels.RollingOLS`). Time-varying betas capture the fact that QQQ's market beta has risen with AI concentration — a static estimate over 10 years would miss this.
 
 **Portfolio factor exposure:**
+
 ```
 E_k = Σᵢ wᵢ × βᵢₖ
 ```
+
 Updates continuously as prices move — even without trades.
 
 **Risk attribution:**
+
 ```
 σ²_p = Σₖ (Eₖ² × Var(fₖ)) + Σᵢ wᵢ² × σ²_εᵢ
         ───────────────────   ───────────────────
@@ -317,44 +322,48 @@ Updates continuously as prices move — even without trades.
 
 ![Risk Attribution](outputs/fig3_risk_attribution.png)
 
-*Waterfall, donut, stacked-area-over-time, and traffic-light views of the
+_Waterfall, donut, stacked-area-over-time, and traffic-light views of the
 same variance decomposition. For this ~60%-equity-weighted portfolio, MKT
 dominates, as expected. The risk percentages sum to exactly 100% by
 construction — see the tolerance note in `compute_risk_attribution`'s
 docstring in `betadrift.py` before assuming that precision generalizes to
-a different decomposition convention.*
+a different decomposition convention._
 
 **Drift z-score:**
+
 ```
 z_k(t) = (actual_exposure_k(t) − intended_exposure_k) / σ(drift_k)
 ```
+
 Threshold: 2.0σ in Calm · 1.5σ in Transition · 1.0σ in Stress.
 
 ![Drift History](outputs/fig4_drift_history.png)
 
-*Factor drift since the last rebalance, a z-score heatmap over time, and
+_Factor drift since the last rebalance, a z-score heatmap over time, and
 today's snapshot. **Heads up:** the DUR line in this figure is currently
 dominated by a units mismatch, not a real signal — see "A Data Quirk I
-Found," below, before reading too much into the DUR z-score specifically.*
+Found," below, before reading too much into the DUR z-score specifically._
 
 **Rebalance optimizer:**
+
 ```
 minimize:   TC(δw) + λ·||B^T(w+δw) − B*||² + 0.1·||δw||₁
 subject to: Σδwᵢ = 0   (dollar-neutral)
             w+δw ≥ 0   (long-only)
             |δwᵢ| ≤ 0.15
 ```
+
 Transaction costs via Almgren-Chriss: `TC_i = spread_i/2 + η·σᵢ·√(|δwᵢ|/ADVᵢ)`. The L1 penalty promotes sparse trades — the optimizer prefers moving a few assets significantly over moving many assets slightly.
 
 ![Rebalance Optimizer](outputs/fig5_rebalance_optimizer.png)
 ![Cost Analysis](outputs/fig6_cost_analysis.png)
 
-*Left to right, top to bottom: recommended trade list, before/target/after
+_Left to right, top to bottom: recommended trade list, before/target/after
 exposure per factor, transaction cost breakdown by asset, and the λ
 sensitivity curve (cost vs. factor-tracking error trade-off). The cost
 analysis figure below it confirms the optimizer's economic intuition
 empirically — VIXY/USO-style illiquid assets are the most expensive to
-trade, SPY/IEF the cheapest.*
+trade, SPY/IEF the cheapest._
 
 ---
 
@@ -379,9 +388,9 @@ python dashboard.py
 
 ![Regime Context](outputs/fig7_regime_context.png)
 
-*Static notebook equivalent of what Panels C/D show live: regime bands
+_Static notebook equivalent of what Panels C/D show live: regime bands
 against portfolio beta drift, regime-conditional factor targets, headline
-factor gauges, and a timeline of drift-threshold breaches.*
+factor gauges, and a timeline of drift-threshold breaches._
 
 The dashboard deliberately does not re-fit the HMM on refresh — regime detection uses the pre-trained model, and only the feature computation and regime classification update with live data. A full re-fit (up to 60 random restarts, screened against known reference dates) took up to ~16s in testing; not something you want blocking an interactive refresh click.
 
@@ -409,18 +418,18 @@ jupyter notebook betadrift.ipynb  # research notebook with all 10 figures
 
 The research notebook (`betadrift.ipynb`) builds all 10 figures with narrated markdown cells explaining the theory, expected output, and interpretation at each step.
 
-| Figure | What it shows |
-|--------|--------------|
-| `fig_cb1_regime_timeline.png` | Regime-shaded cumulative returns, avg pairwise correlation, SPY-TLT flip |
-| `fig_cb2_hmm_diagnostics.png` | State probabilities, feature clusters, calm vs. stress heatmaps, duration distributions |
-| `fig_cb3_regime_cost.png` | PCA scree plot, PC1 loadings, absorption ratio, walk-forward (equal-weight vs. static MVO vs. regime-switching) |
-| `fig1_factor_returns.png` | Rolling cumulative return per factor |
-| `fig2_factor_loadings.png` | Current loading heatmap, rolling QQQ beta, R², idiosyncratic vol |
-| `fig3_risk_attribution.png` | Variance waterfall, donut, stacked area over time, traffic light |
-| `fig4_drift_history.png` | Drift time series, z-score heatmap, current snapshot |
-| `fig5_rebalance_optimizer.png` | Recommended trades, before/after factor exposures, cost breakdown, λ sensitivity |
-| `fig6_cost_analysis.png` | Break-even drift thresholds, liquidity vs. cost scatter |
-| `fig7_regime_context.png` | Regime bands vs. beta drift, regime-conditional targets, gauges |
+| Figure                         | What it shows                                                                                                   |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `fig_cb1_regime_timeline.png`  | Regime-shaded cumulative returns, avg pairwise correlation, SPY-TLT flip                                        |
+| `fig_cb2_hmm_diagnostics.png`  | State probabilities, feature clusters, calm vs. stress heatmaps, duration distributions                         |
+| `fig_cb3_regime_cost.png`      | PCA scree plot, PC1 loadings, absorption ratio, walk-forward (equal-weight vs. static MVO vs. regime-switching) |
+| `fig1_factor_returns.png`      | Rolling cumulative return per factor                                                                            |
+| `fig2_factor_loadings.png`     | Current loading heatmap, rolling QQQ beta, R², idiosyncratic vol                                                |
+| `fig3_risk_attribution.png`    | Variance waterfall, donut, stacked area over time, traffic light                                                |
+| `fig4_drift_history.png`       | Drift time series, z-score heatmap, current snapshot                                                            |
+| `fig5_rebalance_optimizer.png` | Recommended trades, before/after factor exposures, cost breakdown, λ sensitivity                                |
+| `fig6_cost_analysis.png`       | Break-even drift thresholds, liquidity vs. cost scatter                                                         |
+| `fig7_regime_context.png`      | Regime bands vs. beta drift, regime-conditional targets, gauges                                                 |
 
 ---
 
@@ -437,7 +446,7 @@ Two things surfaced only by running this against real market data, not from read
 
 **Look-ahead bias.** `fig_cb3`'s simplified regime-switching comparison uses in-sample HMM labels (the model was trained on the full history, including the period being backtested). A production system would re-fit the HMM at each date using only past data.
 
-**Fixed defensive allocation is not regime-robust.** `fig_cb3`'s walk-forward shows the simplified regime-switching strategy helped in 2020 but *hurt* in 2022, because its static defensive tilt (heavy TLT/GLD) assumes a flight-to-quality crisis and 2022 was a rate shock instead. A single fixed "risk-off" allocation is not a substitute for BetaDrift's actual approach — conditioning the rebalance target on the current factor structure rather than a static defensive basket.
+**Fixed defensive allocation is not regime-robust.** `fig_cb3`'s walk-forward shows the simplified regime-switching strategy helped in 2020 but _hurt_ in 2022, because its static defensive tilt (heavy TLT/GLD) assumes a flight-to-quality crisis and 2022 was a rate shock instead. A single fixed "risk-off" allocation is not a substitute for BetaDrift's actual approach — conditioning the rebalance target on the current factor structure rather than a static defensive basket.
 
 **Statistical factor model.** Factor loadings are derived from return regressions, not company fundamentals. MSCI Barra fundamental factors would be more stable and more interpretable in a production context.
 

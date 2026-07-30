@@ -412,6 +412,7 @@ def corr_figure_for_date(date_str):
     return fig, actual_date
 
 
+
 def regime_probability_figure():
     """
     Regime Probability Timeline panel: P(Calm)/P(Transition)/P(Stress)
