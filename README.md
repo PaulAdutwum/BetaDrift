@@ -6,8 +6,7 @@ Most portfolio risk systems tell you what happened overnight. BetaDrift tells yo
 
 ## Background
 
-I came into this project as a math and CS student — not someone with a
-finance background. Most of what I knew about portfolio management came
+ Most of what I know about portfolio management came
 from reading: Markowitz's original mean-variance framework, some of the
 Fama-French factor literature, and a few papers on covariance estimation
 that I found while working through the math of what "risk" actually means
